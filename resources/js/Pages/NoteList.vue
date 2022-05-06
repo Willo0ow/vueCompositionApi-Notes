@@ -19,7 +19,7 @@
       </v-btn>
       <v-btn>
         <Link href="/newCategory">
-          Create Note
+          Create Category
         </Link>
       </v-btn>
     </v-card-actions>
