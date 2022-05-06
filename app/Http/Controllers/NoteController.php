@@ -14,7 +14,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        return Note::all();
     }
 
     /**
@@ -35,7 +35,7 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Note::create($request->all());
     }
 
     /**

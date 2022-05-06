@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\NoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::resource("/category", CategoryController::class)->only(['index','store']);
 Route::resource("/subcategory", SubCategoryController::class)->only(['index','store']);
+Route::get("/categorySubs/{category}", [SubCategoryController::class, 'categorySubs']);
+
+Route::resource("/note", NoteController::class)->only(['index','store']);

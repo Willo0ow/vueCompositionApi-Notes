@@ -82,4 +82,8 @@ class SubCategoryController extends Controller
     {
         //
     }
+    public function categorySubs($category)
+    {
+        return SubCategory::where('category', $category)->get();
+    }
 }

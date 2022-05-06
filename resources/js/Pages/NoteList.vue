@@ -4,10 +4,10 @@
     <v-card-text>
       <v-expansion-panels>
         <v-expansion-panel
-          v-for="i in 3"
-          :key="i"
-          title="Item"
-          text="text"
+          v-for="note of notes"
+          :key="note.id"
+          :title="note.subject"
+          :text="note.content"
         />
       </v-expansion-panels>
     </v-card-text>
@@ -27,4 +27,12 @@
 </template>
 <script setup>
 import { Link } from "@inertiajs/inertia-vue3";
+import { ref, onBeforeMount } from "vue";
+import axios from "axios";
+const notes = ref([]);
+const getNotes = async ()=>{
+  const res = await axios.get("/api/note");
+  notes.value = res.data;
+}
+onBeforeMount(getNotes);
 </script>
