@@ -28,11 +28,10 @@
 <script setup>
 import { Link } from "@inertiajs/inertia-vue3";
 import { ref, onBeforeMount } from "vue";
-import axios from "axios";
+import {getNotes} from "../services"
+
 const notes = ref([]);
-const getNotes = async ()=>{
-  const res = await axios.get("/api/note");
-  notes.value = res.data;
-}
-onBeforeMount(getNotes);
+onBeforeMount(async ()=>{
+  notes.value = await getNotes();
+});
 </script>

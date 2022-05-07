@@ -35,16 +35,19 @@
 <script setup>
 import { Link } from "@inertiajs/inertia-vue3";
 import { ref, onBeforeMount, reactive } from "vue";
+import {getCategories} from "../services"
 import axios from "axios";
-let name = ref("");
-let  isSubCategory = ref(false);
-let  categories = ref([]);
-let  category = ref(null);
+
+const name = ref("");
+const  isSubCategory = ref(false);
+const  categories = ref([]);
+const  category = ref(null);
+
 const reset = async () => {
   isSubCategory.value = false;
   name.value = "";
   category.value = null;
-  await getCategories();
+  categories.value = await getCategories();
 }
 const save = async () => {
   if(!isSubCategory.value){
@@ -54,15 +57,8 @@ const save = async () => {
   }
   await reset();
 }
-const getCategories = async () => {
-  const res = await axios.get("/api/category");
-  categories.value = res.data
-  .map((cat)=>{
-    const catCopy = {...cat};
-    catCopy.text = catCopy.name;
-    catCopy.value = catCopy.id;
-    return catCopy;
-  });
-}
-onBeforeMount(getCategories)
+
+onBeforeMount(async ()=>{
+  categories.value = await getCategories();
+})
 </script>

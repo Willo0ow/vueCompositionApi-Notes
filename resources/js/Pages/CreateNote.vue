@@ -18,7 +18,7 @@
             :items="categories"
             item-text="name"
             item-value="id"
-            @update:modelValue="getSubcategories"
+            @update:modelValue="getCategorySubs"
           />
           <v-autocomplete
             v-if="subCategories.length"
@@ -44,6 +44,8 @@
 import { Link } from "@inertiajs/inertia-vue3";
 import axios from "axios";
 import { ref, onBeforeMount } from "vue";
+import {getSubcategories, getCategories} from "../services"
+
 const subject = ref("");
 const content = ref("");
 const category = ref(null);
@@ -56,31 +58,19 @@ const reset = () => {
   category.value = null;
   subCategory.value = null;
 }
-const getCategories = async () => {
-  const res = await axios.get("/api/category");
-  categories.value = res.data
-  .map((cat)=>{
-    const catCopy = {...cat};
-    catCopy.text = catCopy.name;
-    catCopy.value = catCopy.id;
-    return catCopy;
-  });
+
+const getCategorySubs= async () => {
+  subCategories.value = await getSubcategories(category.value);
 }
-const getSubcategories = async () => {
-  const res = await axios.get(`/api/categorySubs/${category.value}`);
-  subCategories.value = res.data
-  .map((cat)=>{
-    const catCopy = {...cat};
-    catCopy.text = catCopy.name;
-    catCopy.value = catCopy.id;
-    return catCopy;
-  });
-}
+
 const save = async () =>{
   await axios.post("/api/note", 
   {subject: subject.value, content: content.value, category: category.value, subCategory: subCategory.value}
   )
   reset();
 }
-onBeforeMount(getCategories)
+
+onBeforeMount(async ()=>{
+  categories.value = await getCategories()
+})
 </script>
