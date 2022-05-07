@@ -1,42 +1,37 @@
 <template>
-  <v-app>
-    <v-main>
-      <v-card class="ma-4">
-        <v-card-title>Utwórz Kategorię</v-card-title>
-        <v-card-text>
-          <v-checkbox
-            v-model="isSubCategory"
-            label="Podkategoria"
-          />
-          <v-text-field
-            v-model="name"
-            label="Nazwa Kategorii"
-          />
-          <v-autocomplete
-            v-if="isSubCategory && categories.length"
-            v-model="category"
-            :items="categories"
-            item-text="name"
-            item-value="id"
-          />
-        </v-card-text>
-        <v-card-actions>
-          <v-btn @click="save">
-            Zapisz
-          </v-btn>
-        </v-card-actions>
-        <Link href="/">
-          Go Home
-        </Link>
-      </v-card>
-    </v-main>
-  </v-app>
+  <PageFrame>
+    <v-card-title>Utwórz Kategorię</v-card-title>
+    <v-card-text>
+      <v-checkbox
+        v-model="isSubCategory"
+        label="Podkategoria"
+      />
+      <v-text-field
+        v-model="name"
+        label="Nazwa Kategorii"
+      />
+      <v-autocomplete
+        v-if="isSubCategory && categories.length"
+        v-model="category"
+        :items="categories"
+      />
+    </v-card-text>
+    <v-card-actions>
+      <v-btn
+        color="success"
+        class="ml-auto"
+        @click="save"
+      >
+        Zapisz
+      </v-btn>
+    </v-card-actions>
+  </PageFrame>
 </template>
 <script setup>
-import { Link } from "@inertiajs/inertia-vue3";
 import { ref, onBeforeMount, reactive } from "vue";
 import {getCategories} from "../services"
 import axios from "axios";
+import PageFrame from "../components/PageFrame.vue"
 
 const name = ref("");
 const  isSubCategory = ref(false);

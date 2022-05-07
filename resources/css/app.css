@@ -1,2 +1,7 @@
 @import '~vuetify/dist/vuetify.min.css';
 @import '~@mdi/font/css/materialdesignicons.min.css';
+
+.v-theme--dark > a {
+    color: white;
+    text-decoration: none;
+}

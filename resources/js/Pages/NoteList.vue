@@ -1,6 +1,6 @@
 <template>
-  <v-card class="ma-4">
-    <v-card-title> Home </v-card-title>
+  <PageFrame>
+    <v-card-title> Notatki </v-card-title>
     <v-card-text>
       <v-expansion-panels>
         <v-expansion-panel
@@ -17,6 +17,7 @@
                 <v-chip
                   color="success"
                   size="small"
+                  class="mr-2"
                 >
                   {{ note.categoryName }}
                 </v-chip>
@@ -40,27 +41,20 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </v-card-text>
-    <v-card-actions>
-      <v-btn>
-        <Link href="/newNote">
-          Create Note
-        </Link>
-      </v-btn>
-      <v-btn>
-        <Link href="/newCategory">
-          Create Category
-        </Link>
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+  </PageFrame>
 </template>
 <script setup>
-import { Link } from "@inertiajs/inertia-vue3";
 import { ref, onBeforeMount } from "vue";
 import {getNotes} from "../services"
+import PageFrame from "../components/PageFrame.vue"
+
 
 const notes = ref([]);
 onBeforeMount(async ()=>{
   notes.value = await getNotes();
 });
+
+const items = [
+  {value: 1, text: "1111"}
+]
 </script>

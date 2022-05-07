@@ -5,7 +5,7 @@ const getSubcategories = async ( category) => {
     return res.data
     .map((cat)=>{
       const catCopy = {...cat};
-      catCopy.text = catCopy.name;
+      catCopy.title = catCopy.name;
       catCopy.value = catCopy.id;
       return catCopy;
     });
