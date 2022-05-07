@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NoteController extends Controller
 {
@@ -14,7 +15,12 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return Note::all();
+        return DB::table('notes')
+        ->leftJoin('categories', 'categories.id', 'notes.category')
+        ->leftJoin('sub_categories', 'sub_categories.id', 'notes.subCategory')
+        ->whereNot('status', 100)
+        ->select('notes.*', 'categories.name as categoryName', 'sub_categories.name as subCategoryName')
+        ->get();
     }
 
     /**

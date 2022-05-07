@@ -6,9 +6,38 @@
         <v-expansion-panel
           v-for="note of notes"
           :key="note.id"
-          :title="note.subject"
-          :text="note.content"
-        />
+        >
+          <v-expansion-panel-title>
+            <div
+              class="d-flex justify-space-between"
+              style="width: 90%"
+            >
+              <span>{{ note.subject }}</span>
+              <div>
+                <v-chip
+                  color="success"
+                  size="small"
+                >
+                  {{ note.categoryName }}
+                </v-chip>
+                <v-chip
+                  color="primary"
+                  size="small"
+                >
+                  {{ note.subCategoryName }}
+                </v-chip>
+              </div>
+            </div>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
+            <p
+              v-for="(line, index) of note.content.split('\n')"
+              :key="index"
+            >
+              {{ line }}
+            </p>
+          </v-expansion-panel-text>
+        </v-expansion-panel>
       </v-expansion-panels>
     </v-card-text>
     <v-card-actions>
