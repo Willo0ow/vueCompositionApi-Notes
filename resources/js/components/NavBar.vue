@@ -2,6 +2,7 @@
   <v-navigation-drawer
     theme="dark"
     permanent
+    width="200"
   >
     <v-list theme="dark">
       <v-list-item
