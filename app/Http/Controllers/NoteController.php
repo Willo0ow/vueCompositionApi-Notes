@@ -50,9 +50,9 @@ class NoteController extends Controller
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function show(Note $note)
+    public function show($note)
     {
-        //
+        return Note::where('id', $note)->first();
     }
 
     /**
@@ -73,9 +73,9 @@ class NoteController extends Controller
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Note $note)
+    public function update(Request $request, $note)
     {
-        //
+        Note::where('id', $note)->update($request->all());
     }
 
     /**

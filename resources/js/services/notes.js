@@ -5,4 +5,9 @@ const getNotes = async ()=>{
     return res.data;
 }
 
-export {getNotes}
+const getNote = async (id)=>{
+    const res = await axios.get(`/api/note/${id}`);
+    return res.data;
+}
+
+export {getNotes, getNote}

@@ -52,8 +52,8 @@
 </template>
 <script setup>
 import axios from "axios";
-import { ref, onBeforeMount } from "vue";
-import {getSubcategories, getCategories} from "../services"
+import { ref, onBeforeMount, useAttrs } from "vue";
+import {getSubcategories, getCategories, getNote} from "../services"
 import PageFrame from "../components/PageFrame.vue"
 
 const subject = ref("");
@@ -63,6 +63,7 @@ const subCategory = ref(null);
 const categories = ref([]);
 const subCategories = ref([]);
 const created_at = ref("");
+const attrs = useAttrs()
 
 const reset = () => {
   subject.value = "";
@@ -86,11 +87,24 @@ const save = async () =>{
     if(created_at.value){
       form.created_at = created_at.value;
     }
-  await axios.post("/api/note",form)
+    if(attrs.id){
+      await axios.patch(`/api/note/${attrs.id}`,form)
+      window.location.assign("/")
+    } else {
+      await axios.post("/api/note",form)
+    }
   reset();
 }
 
 onBeforeMount(async ()=>{
+  if(attrs.id){
+    const retrievedNote = await getNote(attrs.id)
+      subject.value = retrievedNote.subject;
+      content.value = retrievedNote.content;
+      created_at.value = retrievedNote.created_at.slice(0,16);
+      category.value = retrievedNote.category;
+      subCategory.value = retrievedNote.subCategory;
+  }
   categories.value = await getCategories()
 })
 </script>
