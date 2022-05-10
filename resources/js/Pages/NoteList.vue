@@ -31,7 +31,7 @@
       </v-row>
     </v-container>
 
-    <v-card-text>
+    <v-card-text :style="{'max-height': `${windowHeight -210}px`, 'overflow-y':'scroll'}">
       <v-expansion-panels>
         <v-expansion-panel
           v-for="note of filteredNotes"
@@ -90,6 +90,10 @@ const startDate = ref(null);
 const endDate = ref(null);
 
 const notes = ref([]);
+
+const windowHeight = computed(()=>{
+  return window.innerHeight
+})
 
 const categories = computed(()=>{
   if(notes && notes.value && notes.value.length){
