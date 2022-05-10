@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->string('subject');
-            $table->string('content');
+            $table->longText('content');
             $table->integer('status')->default(1); //100 - archived
             $table->unsignedBigInteger('category')->nullable();
             $table->unsignedBigInteger('subCategory')->nullable();

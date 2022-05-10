@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +42,9 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        Note::create($request->all());
+        $note = Note::create($request->all());
+        $noteId = $note->id;
+        Log::create(['table'=>'notes', 'variable'=>'status', 'value'=>1, 'elementId'=>$noteId]);
     }
 
     /**
