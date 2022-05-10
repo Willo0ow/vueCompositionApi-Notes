@@ -2,7 +2,7 @@
   <PageFrame>
     <v-card-title> Notatki </v-card-title>
     <v-container fluid>
-      <v-card-subheader>Filtry</v-card-subheader>
+      <v-card-subtitle>Filtry</v-card-subtitle>
       <v-row fluid>
         <v-col>
           <v-autocomplete
@@ -57,6 +57,13 @@
                 >
                   {{ note.subCategoryName }}
                 </v-chip>
+                <v-icon
+                  class="mx-2"
+                  color="error"
+                  @click="deleteSelectedNote(note.id)"
+                >
+                  mdi-delete-outline
+                </v-icon>
               </div>
             </div>
           </v-expansion-panel-title>
@@ -75,7 +82,7 @@
 </template>
 <script setup>
 import { ref, onBeforeMount, computed } from "vue";
-import {getNotes} from "../services"
+import {getNotes, deleteNote} from "../services"
 import PageFrame from "../components/PageFrame.vue"
 
 const filterCategory = ref(null);
@@ -107,6 +114,11 @@ const filteredNotes = computed(()=>{
   return notes.value
 })
 
+const deleteSelectedNote = async (noteId) => {
+  const noteIndx = notes.value.findIndex((note)=>note.id === noteId);
+  notes.value.splice(noteIndx, 1);
+  await deleteNote(noteId)
+}
 onBeforeMount(async ()=>{
   notes.value = await getNotes();
 });

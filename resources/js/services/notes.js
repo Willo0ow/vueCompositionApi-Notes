@@ -10,4 +10,8 @@ const getNote = async (id)=>{
     return res.data;
 }
 
-export {getNotes, getNote}
+const deleteNote = async (noteId)=>{
+    await axios.delete(`/api/note/${noteId}`);
+}
+
+export {getNotes, getNote, deleteNote}

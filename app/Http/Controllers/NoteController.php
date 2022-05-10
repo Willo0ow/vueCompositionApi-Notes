@@ -84,8 +84,9 @@ class NoteController extends Controller
      * @param  \App\Models\Note  $note
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Note $note)
+    public function destroy($note)
     {
-        //
+        $note = Note::where('id', $note)->first();
+        $note->delete();
     }
 }

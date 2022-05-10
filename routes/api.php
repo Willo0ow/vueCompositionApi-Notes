@@ -25,4 +25,4 @@ Route::resource("/category", CategoryController::class)->only(['index','store'])
 Route::resource("/subcategory", SubCategoryController::class)->only(['index','store']);
 Route::get("/categorySubs/{category}", [SubCategoryController::class, 'categorySubs']);
 
-Route::resource("/note", NoteController::class)->only(['index','store', 'update', 'show']);
+Route::resource("/note", NoteController::class);
