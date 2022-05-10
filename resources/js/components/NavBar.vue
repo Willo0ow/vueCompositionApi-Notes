@@ -24,7 +24,7 @@
 import { Link } from '@inertiajs/inertia-vue3';
 const links = [
   {title: "Lista", icon: "mdi-format-list-bulleted", path: "/"},
-    {title: "Nowa Notatka", icon: "mdi-file-plus", path: "/newNote"},
-      {title: "Kategorie", icon: "mdi-table-column-plus-after", path: "/newCategory"},
+  {title: "Nowa Notatka", icon: "mdi-file-plus", path: "/newNote"},
+  {title: "Kategorie", icon: "mdi-table-column-plus-after", path: "/newCategory"},
 ]
 </script>

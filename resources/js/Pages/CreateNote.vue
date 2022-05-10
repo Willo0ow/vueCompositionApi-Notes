@@ -47,7 +47,16 @@
       >
         Zapisz
       </v-btn>
+      <v-btn @click="openAddCategoryDialog">
+        Dodaj Kategorię
+      </v-btn>
     </v-card-actions>
+    <v-dialog
+      v-model="addCategoryDialog"
+      width="500"
+    >
+      <CreateCategory />
+    </v-dialog>
   </PageFrame>
 </template>
 <script setup>
@@ -55,6 +64,7 @@ import axios from "axios";
 import { ref, onBeforeMount, useAttrs } from "vue";
 import {getSubcategories, getCategories, getNote} from "../services"
 import PageFrame from "../components/PageFrame.vue"
+import CreateCategory from "./CreateCategory.vue";
 
 const subject = ref("");
 const content = ref("");
@@ -94,6 +104,10 @@ const save = async () =>{
       await axios.post("/api/note",form)
     }
   reset();
+}
+const addCategoryDialog = ref(false);
+const openAddCategoryDialog = ()=>{
+  addCategoryDialog.value = true;
 }
 
 onBeforeMount(async ()=>{

@@ -26,5 +26,5 @@ Route::get('/editNote/{id}', function ($id) {
     return Inertia::render('CreateNote', ['id' => $id]);
 });
 Route::get('/newCategory', function () {
-    return Inertia::render('CreateCategory', ['about_us' => 'working']);
+    return Inertia::render('CreateCategory', ['useNav' => true]);
 });

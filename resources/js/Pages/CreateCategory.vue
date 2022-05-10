@@ -1,5 +1,5 @@
 <template>
-  <PageFrame>
+  <PageFrame :show-side-bar="Object.keys(attrs).length && attrs.useNav">
     <v-card-title>Utwórz Kategorię</v-card-title>
     <v-card-text>
       <v-checkbox
@@ -28,7 +28,7 @@
   </PageFrame>
 </template>
 <script setup>
-import { ref, onBeforeMount, reactive } from "vue";
+import { ref, onBeforeMount, useAttrs } from "vue";
 import {getCategories} from "../services"
 import axios from "axios";
 import PageFrame from "../components/PageFrame.vue"
@@ -52,6 +52,7 @@ const save = async () => {
   }
   await reset();
 }
+const attrs = useAttrs()
 
 onBeforeMount(async ()=>{
   categories.value = await getCategories();
