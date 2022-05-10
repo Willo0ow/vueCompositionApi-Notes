@@ -56,6 +56,9 @@
       width="500"
     >
       <CreateCategory />
+      <v-btn @click="closeAddCategoryDialog">
+        Zamknij
+      </v-btn>
     </v-dialog>
   </PageFrame>
 </template>
@@ -108,6 +111,10 @@ const save = async () =>{
 const addCategoryDialog = ref(false);
 const openAddCategoryDialog = ()=>{
   addCategoryDialog.value = true;
+}
+const closeAddCategoryDialog = async ()=>{
+  categories.value = await getCategories();
+  addCategoryDialog.value = false;
 }
 
 onBeforeMount(async ()=>{
