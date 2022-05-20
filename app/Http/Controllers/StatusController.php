@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Log;
-use App\Models\Note;
+use App\Models\Status;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class NoteController extends Controller
+class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +14,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return DB::table('notes')
-        ->leftJoin('categories', 'categories.id', 'notes.category')
-        ->leftJoin('sub_categories', 'sub_categories.id', 'notes.subCategory')
-        ->whereNot('status', 100)
-        ->select('notes.*', 'categories.name as categoryName', 'sub_categories.name as subCategoryName')
-        ->orderBy('created_at', 'desc')
-        ->get();
+        return Status::all();
     }
 
     /**
@@ -43,29 +35,27 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $note = Note::create($request->all());
-        $noteId = $note->id;
-        Log::create(['table'=>'notes', 'variable'=>'status', 'value'=>1, 'elementId'=>$noteId]);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Note  $note
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function show($note)
+    public function show(Status $status)
     {
-        return Note::where('id', $note)->first();
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Note  $note
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function edit(Note $note)
+    public function edit(Status $status)
     {
         //
     }
@@ -74,23 +64,22 @@ class NoteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Note  $note
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $note)
+    public function update(Request $request, Status $status)
     {
-        Note::where('id', $note)->update($request->all());
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Note  $note
+     * @param  \App\Models\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function destroy($note)
+    public function destroy(Status $status)
     {
-        $note = Note::where('id', $note)->first();
-        $note->delete();
+        //
     }
 }

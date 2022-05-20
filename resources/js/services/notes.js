@@ -13,5 +13,8 @@ const getNote = async (id)=>{
 const deleteNote = async (noteId)=>{
     await axios.delete(`/api/note/${noteId}`);
 }
+const updateNoteStatus = async ({id, status})=>{
+    await axios.patch(`/api/note/${id}`, {status: +status})
+}
 
-export {getNotes, getNote, deleteNote}
+export {getNotes, getNote, deleteNote, updateNoteStatus}

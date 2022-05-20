@@ -5,6 +5,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\NoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StatusController;
 
 
 /*
@@ -26,3 +27,4 @@ Route::resource("/subcategory", SubCategoryController::class)->only(['index','st
 Route::get("/categorySubs/{category}", [SubCategoryController::class, 'categorySubs']);
 
 Route::resource("/note", NoteController::class);
+Route::resource("/status", StatusController::class);

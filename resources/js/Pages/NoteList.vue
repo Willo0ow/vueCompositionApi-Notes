@@ -64,10 +64,18 @@
                 >
                   mdi-delete-outline
                 </v-icon>
+                <span>{{ note.created_at }}</span>
               </div>
             </div>
           </v-expansion-panel-title>
           <v-expansion-panel-text>
+            <v-autocomplete
+              v-model="note.status"
+              style="max-width: 150px"
+              :items="statuses"
+              label="Status"
+              @update:model-value="updateNoteStatus({id: note.id, status: $event})"
+            />
             <p
               v-for="(line, index) of note.content.split('\n')"
               :key="index"
@@ -82,7 +90,7 @@
 </template>
 <script setup>
 import { ref, onBeforeMount, computed } from "vue";
-import {getNotes, deleteNote} from "../services"
+import {getNotes, deleteNote, getStatuses, updateNoteStatus} from "../services"
 import PageFrame from "../components/PageFrame.vue"
 
 const filterCategory = ref(null);
@@ -123,7 +131,9 @@ const deleteSelectedNote = async (noteId) => {
   notes.value.splice(noteIndx, 1);
   await deleteNote(noteId)
 }
+const statuses = ref([]);
 onBeforeMount(async ()=>{
+  statuses.value = await getStatuses();
   notes.value = await getNotes();
 });
 </script>
