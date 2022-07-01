@@ -52,6 +52,7 @@
                   {{ note.categoryName }}
                 </v-chip>
                 <v-chip
+                  v-if="note.subCategoryName"
                   color="primary"
                   size="small"
                 >
